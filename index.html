@@ -12,7 +12,43 @@
 <body>
     <header id="mainHeader"></header>
 
-    <main></main>
+    <main>
+        <section class="currency-section">
+            <div class="favorite-exchanges">
+                <p class="favorite-exchanges-title">Favorite Exchanges</p>
+                <div class="favorite-exchanges-container"></div>
+            </div>
+            <div class="data-container">
+                <div class="inputs-container">
+                    <button class="save-exchange" id="saveExchange">Save Current Conversion</button>
+                    <div class="input">
+                        <select class="currency-select" name="currency-input" id="currencyInput"></select>
+                        <input type="number" class="user-input" id="userInput">
+                    </div>
+                    <div class="input">
+                        <select class="currency-select" name="currency-target" id="currencyTarget"></select>
+                        <input type="number" class="exchange-result" disabled id="exchangeResult">
+                    </div>
+                </div>
+                <button class="switch-button" id="switchButton">
+                    <img src="/images/swap.png" alt="" class="switch-image">
+                </button>
+            </div>
+            <div class="currency-buttons">
+                <button class="convert" id="convert">Convert</button>
+                <div class="auto-convert-container">
+                    <p class="auto-convert-text">Auto Convert:</p>
+                    <button class="auto-convert disabled" id="autoConvert"></button>
+                </div>
+            </div>
+        </section>
+        <aside class="news-aside">
+            <div class="news-top">
+                <h2 class="news-title">Latest News from</h2>
+                <select name="" id="countrySelect" class="country-select"></select>
+            </div>
+        </aside>
+    </main>
 
     <footer id="mainFooter"></footer>
 

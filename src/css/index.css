@@ -45,7 +45,214 @@ header {
 
 /* Main Styles */
 main {
+    display: flex;
+    gap: 5rem;
     flex: 1;
+    padding: 5rem;
+}
+
+.currency-section {
+    padding: 2rem 2rem;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(220, 220, 220, 0.7);
+    border-radius: 20px;
+    max-width: 450px;
+}
+
+.save-exchange {
+    background-color: transparent;
+    font-family: var(--poppins);
+    color: var(--black);
+    font-size: 0.7rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.save-exchange:hover {
+    opacity: 0.7;
+}
+
+.favorite-exchanges-title {
+    font-family: var(--poppins);
+    margin: 0;
+}
+
+.favorite-exchanges-container {
+    min-height: 100px;
+    max-height: 250px;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+    overflow: auto;
+}
+
+.no-favorites {
+    font-family: var(--poppins);
+    font-size: 0.8rem;
+    color: var(--lightgrey);
+    margin: 0;
+    margin-bottom: 1.5rem;;
+}
+
+.exchange-button {
+    background-color: rgb(218, 217, 217);
+    border-radius: 3px;
+    border: none;
+    font-family: "Twemoji Country Flags", "Segoe UI", "Apple Color Emoji", sans-serif;
+    font-size: 1.2rem;
+}
+
+.data-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 400px;
+}
+
+.inputs-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.currency-select, .country-select {
+    width: 60px;
+    font-family: "Twemoji Country Flags", "Segoe UI", "Apple Color Emoji", sans-serif;
+    font-size: 2rem;       
+    border: 1px solid white;
+    outline: none;
+    cursor: pointer;
+}
+
+.currency-select:focus {
+    outline: none;
+    border: 1px solid white;
+}
+
+.currency-select option, .country-select option {
+    font-size: 1rem;
+    background-color: white;
+}
+
+.user-input, .exchange-result {
+    font-family: var(--poppins);
+    background-color: white;
+    border: 0.15rem solid rgb(184, 184, 184);
+    font-size: 20px;
+    line-height: 40px;
+    padding-left: 10px;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.user-input:focus {
+    outline: none;
+    border: 0.15rem solid var(--green)
+}
+
+.switch-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.switch-button:hover {
+    opacity: 0.7;
+}
+
+.switch-image {
+    width: 25px;
+}
+
+.currency-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2rem;
+    gap: 0.5rem;
+}
+
+.convert {
+    background-color: var(--green);
+    font-family: var(--poppins);
+    color: var(--white);
+    padding: 0.5rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 250px;
+}
+
+.convert:hover {
+    background-color: var(--darkgreen);
+}
+
+.auto-convert-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.auto-convert-text {
+    font-family: var(--poppins);
+    font-size: 0.7rem;
+    margin: 0;
+    color: var(--lightgrey)
+}
+
+.auto-convert {
+    font-family: var(--poppins);
+    background-color: transparent;
+    border: none;
+    color: white;
+    padding: 0.1rem 0.5rem;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    cursor: pointer;
+}
+
+.auto-convert:hover {
+    opacity: 0.8;
+}
+
+.disabled {
+    background-color: rgb(218, 69, 69);
+}
+
+.enabled {
+    background-color: var(--green);
+}
+
+/* News Aside */
+.news-aside {
+    padding: 2rem 2rem;
+    background-color: white;
+    box-shadow: 0px 0px 10px 0px rgba(220, 220, 220, 0.7);
+    border-radius: 20px;
+    width: 100%;
+}
+
+.news-top {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.news-title {
+    font-family: var(--news);
 }
 
 /* Footer Styles */
@@ -60,4 +267,9 @@ footer {
     font-family: var(--poppins);
     margin: 0;
     color: var(--white)
+}
+
+/* Hidden */
+.hidden {
+    display: none;
 }
