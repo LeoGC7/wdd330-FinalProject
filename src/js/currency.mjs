@@ -17,7 +17,7 @@ function getFlagEmoji(countryCode) {
     return String.fromCodePoint(...codePoints);
 }
 
-// Create Select Options
+// Display Select Options
 export async function displaySelectOptions(data, inputSelect, targetSelect) {
     const res = await fetch(data);
     
@@ -30,12 +30,14 @@ export async function displaySelectOptions(data, inputSelect, targetSelect) {
     currencies.forEach(currency => {
         const flag = getFlagEmoji(currency.cc);
         const displayText = `${flag} - ${currency.name}`;
+        const currencyCode = currency.name.substring(0, 3);
 
         const currencyInputOption = document.createElement('option');
         currencyInputOption.textContent = displayText;
         currencyInputOption.value = currency.cc;
+        currencyInputOption.dataset.currency = currencyCode;
 
-        if (currency.name.includes('USA Dollar')) {
+        if (currency.name.includes('US Dollar')) {
             currencyInputOption.selected = true;
         }
 
@@ -44,8 +46,9 @@ export async function displaySelectOptions(data, inputSelect, targetSelect) {
         const currencyTargetOption = document.createElement('option');
         currencyTargetOption.textContent = displayText;
         currencyTargetOption.value = currency.cc;
+        currencyTargetOption.dataset.currency = currencyCode;
 
-        if (currency.name.includes('Eurozone Euro')) {
+        if (currency.name.includes('Euro')) {
             currencyTargetOption.selected = true;
         }
 
@@ -83,6 +86,7 @@ function saveFavoriteExchange(currencyInput, currencyTarget) {
     favoriteExchanges.push(exchange)
 
     setLocalStorage(key, favoriteExchanges)
+    location.reload()
 }
 
 const currencyInput = document.getElementById('currencyInput')
@@ -138,7 +142,7 @@ function selectFavoriteExchange(inputCode, targetCode) {
     currencyTarget.value = targetCode;
 }
 
-
+// Select favorite exchange click event
 export function initFavoriteClick() {
     const favoriteExchangeContainer = document.querySelector('.favorite-exchanges-container');
 
@@ -155,15 +159,45 @@ export function initFavoriteClick() {
 }
 
 // Switch currencies
-async function switchCurrencies() {
-    const currencyInput = document.getElementById('currencyInput')
-    const currencyTarget = document.getElementById('currencyTarget')
+function switchCurrencies() {
+    const currencyInput = document.getElementById('currencyInput');
+    const currencyTarget = document.getElementById('currencyTarget');
+    const userInput = document.getElementById('userInput');
+    const exchangeResult = document.getElementById('exchangeResult');
 
-    const currencyInputValue = currencyInput.value;
-    const currencyTargetValue = currencyTarget.value;
+    const tempSelect = currencyInput.value;
+    currencyInput.value = currencyTarget.value;
+    currencyTarget.value = tempSelect;
 
-    currencyTarget.value = currencyInputValue;
-    currencyInput.value = currencyTargetValue;
+    const tempAmount = userInput.value;
+    userInput.value = exchangeResult.value;
+    exchangeResult.value = tempAmount;
 }
 const switchButton = document.getElementById('switchButton');
 switchButton.addEventListener('click', switchCurrencies)
+
+// Get exchange rate from Frankfurter
+const BASE_URL = "https://api.frankfurter.app/latest";
+
+export async function getExchangeRate(inputCurrency, targetCurrency, amount) {
+
+    const input = inputCurrency.toUpperCase();
+    const target = targetCurrency.toUpperCase();
+
+    if (input === target) return amount;
+
+    try {
+        const res = await fetch(`${BASE_URL}?amount=${amount}&from=${input}&to=${target}`)
+
+        if (!res.ok) {
+            throw new Error("Currency pair not supported")
+        }
+
+        const data = await res.json();
+
+        return data.rates[target].toFixed(2);
+    } catch (error) {
+        console.error('Fetch Error:', error)
+        return "Error"
+    }
+}
