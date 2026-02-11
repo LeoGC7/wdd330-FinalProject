@@ -279,3 +279,28 @@ footer {
 .hidden {
     display: none;
 }
+
+/* Responsiveness */
+@media screen and (max-width: 767px){
+    main {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .data-container {
+        gap: 0.5rem;
+    }
+
+    .switch-image {
+        margin-top: 1.5rem;
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    .news-aside {
+        box-sizing: border-box;
+    }
+}
