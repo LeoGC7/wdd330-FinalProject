@@ -122,9 +122,48 @@ function createFavoriteCard(inputCurrency, targetCurrency) {
 
     const card = document.createElement('button');
     card.classList.add('exchange-button')
-    card.innerHTML = `
-        ${inputFlagIcon} &#8594 ${targetFlagIcon}
-    `
+    card.setAttribute('data-input', inputCurrency);
+    card.setAttribute('data-target', targetCurrency)
+    card.innerHTML = `${inputFlagIcon} &#8594 ${targetFlagIcon}`
 
     favoriteExchangesContainer.appendChild(card)
 }
+
+// Select favorite exchange
+function selectFavoriteExchange(inputCode, targetCode) {
+    const currencyInput = document.getElementById('currencyInput')
+    const currencyTarget = document.getElementById('currencyTarget')
+
+    currencyInput.value = inputCode;
+    currencyTarget.value = targetCode;
+}
+
+
+export function initFavoriteClick() {
+    const favoriteExchangeContainer = document.querySelector('.favorite-exchanges-container');
+
+    favoriteExchangeContainer.addEventListener('click', (e) => {
+        const favoriteCard = e.target.closest('.exchange-button');
+
+        if (favoriteCard) {
+            const input = favoriteCard.dataset.input;
+            const target = favoriteCard.dataset.target;
+
+            selectFavoriteExchange(input, target);
+        }
+    })
+}
+
+// Switch currencies
+async function switchCurrencies() {
+    const currencyInput = document.getElementById('currencyInput')
+    const currencyTarget = document.getElementById('currencyTarget')
+
+    const currencyInputValue = currencyInput.value;
+    const currencyTargetValue = currencyTarget.value;
+
+    currencyTarget.value = currencyInputValue;
+    currencyInput.value = currencyTargetValue;
+}
+const switchButton = document.getElementById('switchButton');
+switchButton.addEventListener('click', switchCurrencies)

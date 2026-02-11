@@ -104,6 +104,12 @@ main {
     border: none;
     font-family: "Twemoji Country Flags", "Segoe UI", "Apple Color Emoji", sans-serif;
     font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.exchange-button:hover {
+    transform: scale(1.1);
 }
 
 .data-container {
