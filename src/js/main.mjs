@@ -1,6 +1,6 @@
 import { loadHeaderandFooter } from "./utils.mjs";
 import { displaySelectOptions, displayFavoriteExchanges, initFavoriteClick, getExchangeRate } from "./currency.mjs";
-import { displayCountries } from "./news.mjs";
+import { displayCountries, getNews } from "./news.mjs";
 
 const currencies = './json/currency.json';
 const countries = './json/country.json'
@@ -42,9 +42,21 @@ const handleSelectChange = () => {
 }
 inputSelectElement.addEventListener('change', handleSelectChange);
 targetSelectElement.addEventListener('change', handleSelectChange);
+countrySelectElement.addEventListener('change', (e) => {
+    getNews(e.target.value);
+})
 
-displaySelectOptions(currencies, inputSelectElement, targetSelectElement)
-displayCountries(countries, countrySelectElement);
-loadHeaderandFooter();
-displayFavoriteExchanges();
-initFavoriteClick();
+async function init() {
+    await displaySelectOptions(currencies, inputSelectElement, targetSelectElement)
+    await displayCountries(countries, countrySelectElement);
+
+    if (countrySelectElement.value) {
+        getNews(countrySelectElement.value);
+    }
+
+    loadHeaderandFooter();
+    displayFavoriteExchanges();
+    initFavoriteClick();
+}
+
+init()
